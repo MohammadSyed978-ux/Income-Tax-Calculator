@@ -1,0 +1,356 @@
+VERSION 5.00
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} PersonalIncomeTaxCalculator 
+   Caption         =   "Personal Income Tax Calculator"
+   ClientHeight    =   5360
+   ClientLeft      =   108
+   ClientTop       =   456
+   ClientWidth     =   8664.001
+   OleObjectBlob   =   "PersonalIncomeTaxCalculator.frx":0000
+   StartUpPosition =   1  'CenterOwner
+End
+Attribute VB_Name = "PersonalIncomeTaxCalculator"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private Sub Label8_Click()
+
+End Sub
+
+Private Sub CommandButton1_Click()
+
+End Sub
+
+Private Sub annualIncomeTextBox_Change()
+
+End Sub
+
+Private Sub britishColumbiaLabel_Click()
+
+End Sub
+
+Private Sub closeButton_Click()
+PersonalIncomeTaxCalculator.Hide
+
+End Sub
+
+Private Sub firstNameTextBox_Change()
+
+End Sub
+
+Private Sub netIncomeButton_Click()
+Dim AI As Double
+Dim CPP As Double
+Dim EI As Double
+Dim EIQ As Double
+Dim TI As Double
+Dim TIQ As Double
+Dim FT As Double
+Dim FTQ As Double
+Dim PTO As Double
+Dim PTA As Double
+Dim PTBC As Double
+Dim PTQ As Double
+Dim NIO As Double
+Dim NIA As Double
+Dim NIBC As Double
+Dim NIQ As Double
+
+If firstNameTextBox = "" Or lastNameTextBox = "" Or sinTextBox = "" Or annualIncomeTextBox = "" Then
+    MsgBox "You need to provide all information"
+Else
+    
+    AI = annualIncomeTextBox.Value
+    
+    If AI > 64900 Then
+    CPP = 3499.8
+    Else
+    CPP = (AI - 3500) * 0.057
+    End If
+    
+    If AI > 60300 Then
+    EI = 952.74
+    Else
+    EI = AI * 0.0158
+    End If
+    
+    If AI > 60300 Then
+    EIQ = 723.6
+    Else
+    EI = AI * 0.012
+    End If
+    
+    TI = AI - CPP - EI
+    TIQ = AI - CPP - EIQ
+    
+    If TI <= 50197 Then
+        FT = TI * 0.15
+    ElseIf TI <= 100392 Then
+        FT = 50197 * 0.15 + (TI - 50197) * 0.205
+    ElseIf TI <= 155625 Then
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (TI - 100392) * 0.26
+    ElseIf TI <= 221708 Then
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (TI - 155625) * 0.29
+    Else
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (221708 - 155625) * 0.29 + (TI - 221708) * 0.33
+    End If
+    
+    If TIQ <= 50197 Then
+        FTQ = TIQ * 0.15
+    ElseIf TIQ <= 100392 Then
+        FTQ = 50197 * 0.15 + (TIQ - 50197) * 0.205
+    ElseIf TIQ <= 155625 Then
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (TIQ - 100392) * 0.26
+    ElseIf TIQ <= 221708 Then
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (TIQ - 155625) * 0.29
+    Else
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (221708 - 155625) * 0.29 + (TIQ - 221708) * 0.33
+    End If
+    
+    If TI <= 46226 Then
+        PTO = TI * 0.0505
+    ElseIf TI <= 92454 Then
+        PTO = 46226 * 0.0505 + (TI - 46226) * 0.0915
+    ElseIf TI <= 150000 Then
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (TI - 92454) * 0.1116
+    ElseIf TI <= 220000 Then
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (150000 - 92454) * 0.1116 + (TI - 150000) * 0.1216
+    Else
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (150000 - 92454) * 0.1116 + (220000 - 150000) * 0.1216 + (TI - 220000) * 0.1316
+    End If
+    
+    If TI <= 131220 Then
+        PTA = TI * 0.1
+    ElseIf TI <= 157464 Then
+        PTA = 131220 * 0.1 + (TI - 131220) * 0.12
+    ElseIf TI <= 209952 Then
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (TI - 157464) * 0.13
+    ElseIf TI <= 314928 Then
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (209952 - 157464) * 0.13 + (TI - 209952) * 0.14
+    Else
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (209952 - 157464) * 0.13 + (314928 - 209952) * 0.14 + (TI - 314928) * 0.15
+    End If
+    
+    If TI <= 43070 Then
+        PTBC = TI * 0.0506
+    ElseIf TI <= 86141 Then
+        PTBC = 43070 * 0.0506 + (TI - 43070) * 0.077
+    ElseIf TI <= 98901 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (TI - 86141) * 0.105
+    ElseIf TI <= 120094 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (TI - 98901) * 0.1229
+    ElseIf TI <= 162832 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (TI - 120094) * 0.147
+    ElseIf TI <= 227091 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (162832 - 120094) * 0.147 + (TI - 162832) * 0.147
+    Else
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (162832 - 120094) * 0.147 + (227091 - 162832) * 0.147 + (TI - 227091) * 0.205
+    End If
+    
+    If TIQ <= 46295 Then
+        PTQ = TIQ * 0.15
+    ElseIf TIQ <= 92580 Then
+        PTQ = 46295 * 0.15 + (TIQ - 46295) * 0.2
+    ElseIf TIQ <= 112655 Then
+        PTQ = 46295 * 0.15 + (92580 - 46295) * 0.2 + (TIQ - 92580) * 0.24
+    Else
+        PTQ = 46295 * 0.15 + (92580 - 46295) * 0.2 + (112655 - 92580) * 0.24 + (TIQ - 112655) * 0.2575
+    End If
+    
+    NIO = AI - CPP - EI - (FT + PTO)
+    NIA = AI - CPP - EI - (FT + PTA)
+    NIBC = AI - CPP - EI - (FT + PTBC)
+    NIQ = AI - CPP - EIQ - (FTQ + PTQ)
+    
+    ontarioLabel = Format(NIO, "currency")
+    albertaLabel = Format(NIA, "currency")
+    britishColumbiaLabel = Format(NIBC, "currency")
+    quebecLabel = Format(NIQ, "currency")
+End If
+
+End Sub
+
+Private Sub ontarioLabel_Click()
+
+End Sub
+
+Private Sub reportButton_Click()
+Dim AI As Double
+Dim CPP As Double
+Dim EI As Double
+Dim EIQ As Double
+Dim TI As Double
+Dim TIQ As Double
+Dim FT As Double
+Dim FTQ As Double
+Dim PTO As Double
+Dim PTA As Double
+Dim PTBC As Double
+Dim PTQ As Double
+Dim NIO As Double
+Dim NIA As Double
+Dim NIBC As Double
+Dim NIQ As Double
+
+If firstNameTextBox = "" Or lastNameTextBox = "" Or sinTextBox = "" Or annualIncomeTextBox = "" Then
+    MsgBox "You need to provide all information"
+Else
+
+    AI = annualIncomeTextBox.Value
+    FNText = firstNameTextBox
+    LNText = lastNameTextBox
+    sinText = sinTextBox
+    
+    If AI > 64900 Then
+    CPP = 3499.8
+    Else
+    CPP = (AI - 3500) * 0.057
+    End If
+    
+    If AI > 60300 Then
+    EI = 952.74
+    Else
+    EI = AI * 0.0158
+    End If
+    
+    If AI > 60300 Then
+    EIQ = 723.6
+    Else
+    EIQ = AI * 0.012
+    End If
+    
+    TI = AI - CPP - EI
+    TIQ = AI - CPP - EIQ
+    
+    If TI <= 50197 Then
+        FT = TI * 0.15
+    ElseIf TI <= 100392 Then
+        FT = 50197 * 0.15 + (TI - 50197) * 0.205
+    ElseIf TI <= 155625 Then
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (TI - 100392) * 0.26
+    ElseIf TI <= 221708 Then
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (TI - 155625) * 0.29
+    Else
+        FT = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (221708 - 155625) * 0.29 + (TI - 221708) * 0.33
+    End If
+    
+    If TIQ <= 50197 Then
+        FTQ = TIQ * 0.15
+    ElseIf TIQ <= 100392 Then
+        FTQ = 50197 * 0.15 + (TIQ - 50197) * 0.205
+    ElseIf TIQ <= 155625 Then
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (TIQ - 100392) * 0.26
+    ElseIf TIQ <= 221708 Then
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (TIQ - 155625) * 0.29
+    Else
+        FTQ = 50197 * 0.15 + (100392 - 50197) * 0.205 + (155625 - 100392) * 0.26 + (221708 - 155625) * 0.29 + (TIQ - 221708) * 0.33
+    End If
+    
+    If TI <= 46226 Then
+        PTO = TI * 0.0505
+    ElseIf TI <= 92454 Then
+        PTO = 46226 * 0.0505 + (TI - 46226) * 0.0915
+    ElseIf TI <= 150000 Then
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (TI - 92454) * 0.1116
+    ElseIf TI <= 220000 Then
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (150000 - 92454) * 0.1116 + (TI - 150000) * 0.1216
+    Else
+        PTO = 46226 * 0.0505 + (92454 - 46226) * 0.0915 + (150000 - 92454) * 0.1116 + (220000 - 150000) * 0.1216 + (TI - 220000) * 0.1316
+    End If
+    
+    If TI <= 131220 Then
+        PTA = TI * 0.1
+    ElseIf TI <= 157464 Then
+        PTA = 131220 * 0.1 + (TI - 131220) * 0.12
+    ElseIf TI <= 209952 Then
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (TI - 157464) * 0.13
+    ElseIf TI <= 314928 Then
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (209952 - 157464) * 0.13 + (TI - 209952) * 0.14
+    Else
+        PTA = 131220 * 0.1 + (157464 - 131220) * 0.12 + (209952 - 157464) * 0.13 + (314928 - 209952) * 0.14 + (TI - 314928) * 0.15
+    End If
+    
+    If TI <= 43070 Then
+        PTBC = TI * 0.0506
+    ElseIf TI <= 86141 Then
+        PTBC = 43070 * 0.0506 + (TI - 43070) * 0.077
+    ElseIf TI <= 98901 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (TI - 86141) * 0.105
+    ElseIf TI <= 120094 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (TI - 98901) * 0.1229
+    ElseIf TI <= 162832 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (TI - 120094) * 0.147
+    ElseIf TI <= 227091 Then
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (162832 - 120094) * 0.147 + (TI - 162832) * 0.147
+    Else
+        PTBC = 43070 * 0.0506 + (86141 - 43070) * 0.077 + (98901 - 86141) * 0.105 + (120094 - 98901) * 0.1229 + (162832 - 120094) * 0.147 + (227091 - 162832) * 0.147 + (TI - 227091) * 0.205
+    End If
+    
+    If TIQ <= 46295 Then
+        PTQ = TIQ * 0.15
+    ElseIf TIQ <= 92580 Then
+        PTQ = 46295 * 0.15 + (TIQ - 46295) * 0.2
+    ElseIf TIQ <= 112655 Then
+        PTQ = 46295 * 0.15 + (92580 - 46295) * 0.2 + (TIQ - 92580) * 0.24
+    Else
+        PTQ = 46295 * 0.15 + (92580 - 46295) * 0.2 + (112655 - 92580) * 0.24 + (TIQ - 112655) * 0.2575
+    End If
+    
+    NIO = AI - CPP - EI - (FT + PTO)
+    NIA = AI - CPP - EI - (FT + PTA)
+    NIBC = AI - CPP - EI - (FT + PTBC)
+    NIQ = AI - CPP - EIQ - (FTQ + PTQ)
+    
+    Range("C4") = firstNameTextBox
+    Range("C5") = lastNameTextBox
+    Range("C6") = sinTextBox
+    Range("C7") = Format(AI, "currency")
+    Range("C8:F8") = Format(CPP, "currency")
+    Range("C9:E9") = Format(EI, "currency")
+    Range("F9") = Format(EIQ, "currency")
+    Range("C10:E10") = Format(FT, "currency")
+    Range("F10") = Format(FTQ, "currency")
+    Range("C11") = Format(PTO, "currency")
+    Range("D11") = Format(PTA, "currency")
+    Range("E11") = Format(PTBC, "currency")
+    Range("F11") = Format(PTQ, "currency")
+    Range("C12") = Format(PTO + FT, "currency")
+    Range("D12") = Format(PTA + FT, "currency")
+    Range("E12") = Format(PTBC + FT, "currency")
+    Range("F12") = Format(PTQ + FTQ, "currency")
+    Range("C13") = Format(NIO, "currency")
+    Range("D13") = Format(NIA, "currency")
+    Range("E13") = Format(NIBC, "currency")
+    Range("F13") = Format(NIQ, "currency")
+    Range("C14") = Format(NIO / 12, "currency")
+    Range("D14") = Format(NIA / 12, "currency")
+    Range("E14") = Format(NIBC / 12, "currency")
+    Range("F14") = Format(NIQ / 12, "currency")
+    Range("C15") = Format(NIO / 26, "currency")
+    Range("D15") = Format(NIA / 26, "currency")
+    Range("E15") = Format(NIBC / 26, "currency")
+    Range("F15") = Format(NIQ / 26, "currency")
+    Range("C16") = Format(NIO / 52, "currency")
+    Range("D16") = Format(NIA / 52, "currency")
+    Range("E16") = Format(NIBC / 52, "currency")
+    Range("F16") = Format(NIQ / 52, "currency")
+         
+End If
+    
+End Sub
+
+Private Sub resetButton_Click()
+firstNameTextBox = ""
+lastNameTextBox = ""
+sinTextBox = ""
+annualIncomeTextBox = ""
+ontarioLabel = ""
+albertaLabel = ""
+britishColumbiaLabel = ""
+quebecLabel = ""
+
+End Sub
+
+Private Sub UserForm_Click()
+PersonalIncomeTaxCalculator.Hide
+End Sub
